@@ -1,0 +1,39 @@
+{
+  "messages": [
+    {
+      "id": 1,
+      "type": "text",
+      "content": "Hello World!",
+      "timestamp": 1653104905349,
+      "author": "user"
+    },
+    {
+      "type": "text",
+      "content": "Hello human!",
+      "author": "bot",
+      "timestamp": 1653104905400,
+      "id": 2
+    },
+    {
+      "type": "text",
+      "content": "Bot response",
+      "author": "bot",
+      "timestamp": 1653107776353,
+      "id": 3
+    },
+    {
+      "type": "text",
+      "content": "Bot response",
+      "author": "bot",
+      "timestamp": 1653107901757,
+      "id": 4
+    },
+    {
+      "type": "text",
+      "content": "Bot response",
+      "author": "bot",
+      "timestamp": 1653107913930,
+      "id": 5
+    }
+  ]
+}
