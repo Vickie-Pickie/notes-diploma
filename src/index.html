@@ -12,35 +12,44 @@
 <div class="app">
   <div class="title padding">
       <div class="title-row">
-          <div class="title-wrapper">WhatsApp</div>
+          <div class="title-wrapper">Дневник записей</div>
           <div class="title-btn-wrapper"></div>
       </div>
   </div>
-  <div class="content padding">
+  <div class="content padding" id="messages">
     <div class="message-wrapper user">
         <div class="message">
             <div class="message-text">На странице с заданием вы найдете подробную инструкцию по его выполнению.
             Там же даны все необходимые рекомендации.</div>
-            <div class="message-date">22:05</div>
+            <div class="message-footer">
+                <a href="#" class="message-pin">Закрепить</a>
+                <div class="message-date">22:05</div>
+            </div>
         </div>
     </div>
     <div class="message-wrapper bot">
         <div class="message">
             <div class="message-text">На странице с заданием вы найдете подробную инструкцию по его выполнению.
                 Там же даны все необходимые рекомендации.</div>
-            <div class="message-date">22:05</div>
+            <div class="message-footer">
+                <a href="#" class="message-pin">Закрепить</a>
+                <div class="message-date">22:05</div>
+            </div>
         </div>
     </div>
   </div>
   <div class="footer padding">
-      <div class="footer-row">
-          <div class="input-wrapper">
-              <input type="text" class="input-control" placeholder="Enter message..." />
+      <form id="send-message">
+          <div class="footer-row">
+              <div class="input-wrapper">
+                  <input name="content" type="text" class="input-control" placeholder="Enter message..." />
+              </div>
+              <div class="footer-btn-wrapper">
+                  <button type="submit" class="submit-btn">Отправить</button>
+              </div>
           </div>
-          <div class="footer-btn-wrapper">
-              <button class="submit-btn">Отправить</button>
-          </div>
-      </div>
+      </form>
+
   </div>
 </div>
 </body>

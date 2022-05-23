@@ -35,5 +35,12 @@
       "timestamp": 1653107913930,
       "id": 5
     }
-  ]
+  ],
+  "pinnedMessage": {
+    "type": "",
+    "content": "",
+    "author": "",
+    "timestamp": 0,
+    "id": 0
+  }
 }
