@@ -10,13 +10,35 @@
 
 <body>
 <div class="app">
-  <div class="title padding">
+    <div class="title padding">
       <div class="title-row">
           <div class="title-wrapper">Дневник записей</div>
           <div class="title-btn-wrapper"></div>
       </div>
-  </div>
-  <div class="content padding" id="messages">
+    </div>
+    <div class="pinned-message hidden" id="pinned-message">
+        <div class="pinned-content">
+            <div class="pinned-title">Закрепленное сообщение</div>
+            <div class="pinned-text">На странице с заданием вы найдете подробную инструкцию На странице с заданием вы найдете подробную инструкцию</div>
+        </div>
+        <div class="pinned-close">x</div>
+    </div>
+    <div class="search-wrapper padding">
+        <form id="search-message-form">
+            <div class="search-row">
+                <div class="search-input-wrapper">
+                    <input name="search" type="text" class="search-input-control" placeholder="Искать в заметках" />
+                    <button class="input-clear hidden">x</button>
+                </div>
+                <div class="search-buttons-wrapper">
+                    <button type="submit" class="search-buttons search-btn">Найти</button>
+                    <button class="search-buttons cancel-btn">Отмена</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="content padding" id="messages">
     <div class="message-wrapper user">
         <div class="message">
             <div class="message-text">На странице с заданием вы найдете подробную инструкцию по его выполнению.
@@ -37,12 +59,12 @@
             </div>
         </div>
     </div>
-  </div>
-  <div class="footer padding">
-      <form id="send-message">
+    </div>
+    <div class="footer padding">
+      <form id="send-message-form">
           <div class="footer-row">
-              <div class="input-wrapper">
-                  <input name="content" type="text" class="input-control" placeholder="Enter message..." />
+              <div class="send-input-wrapper">
+                  <input name="send" type="text" class="send-input-control" placeholder="Enter message..." />
               </div>
               <div class="footer-btn-wrapper">
                   <button type="submit" class="submit-btn">Отправить</button>
@@ -50,7 +72,7 @@
           </div>
       </form>
 
-  </div>
+    </div>
 </div>
 </body>
 

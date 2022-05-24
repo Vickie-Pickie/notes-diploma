@@ -6,6 +6,7 @@ body {
 * {
   box-sizing: border-box;
 }
+
 .padding {
   padding: 10px 20px;
 }
@@ -19,7 +20,9 @@ body {
   font-family: Public Sans, sans-serif;
   margin: 0 auto;
 }
-
+.content {
+  position: relative;
+}
 .title {
   border-bottom: 1px solid #f0eff5;
   color:  #495057;
@@ -63,12 +66,12 @@ body {
   height: 100%;
 }
 
-.input-wrapper {
+.send-input-wrapper {
   flex: 1;
   margin-right: 12px;
 }
 
-.input-control {
+.send-input-control {
   background-color: #e6ebf5;
   border: 1px solid #e6ebf5;
   padding: 5px 10px;
@@ -79,6 +82,38 @@ body {
   color:  #495057;
   width: 100%;
 }
+
+.pinned-message {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #f0eff5;
+}
+
+.pinned-content {
+  font-size: 14px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.pinned-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #7269ef;
+}
+
+.pinned-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pinned-close {
+  margin-left: 20px
+}
+
 
 .message-wrapper {
   display: flex;
@@ -128,3 +163,64 @@ body {
   color:#7a7f9a;
 }
 
+.hidden {
+  display: none;
+}
+
+.search-wrapper {
+  border-bottom: 1px solid #f0eff5;
+}
+
+.search-row {
+  display: flex;
+}
+.search-input-wrapper {
+  display: flex;
+  flex: 1;
+  margin-right: 8px;
+  background-color: #fff;
+  border: 1px solid #e6ebf5;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  font-weight: 400;
+  color: #495057;
+}
+
+.search-input-control {
+  width: 100%;
+  border: 0;
+  line-height: 1.5;
+}
+.search-btn-wrapper {
+
+}
+.search-input-control:focus, .send-input-control:focus {
+  outline: none;
+}
+
+.input-clear {
+  border: 0;
+  background: #fff;
+  cursor: pointer;
+}
+.search-buttons {
+  cursor: pointer;
+  border-radius: 2px;
+  color: #495057;
+  background-color: #f5f7fb;;
+  border: 1px solid #e6ebf5;
+  padding: 5px 10px;
+  height: 100%;
+}
+
+.search-btn {
+  margin-right: 4px;
+}
+
+.no-message-found {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
