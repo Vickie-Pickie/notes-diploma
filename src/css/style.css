@@ -25,14 +25,15 @@ body {
 }
 .title {
   border-bottom: 1px solid #f0eff5;
-  color:  #495057;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 1.5;
 }
 
 .title-row {
   display: flex;
+  justify-content: space-between;
+  color:  #495057;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 .title-wrapper {
@@ -41,6 +42,12 @@ body {
 
 .title-btn-wrapper {
 
+}
+
+.title-button {
+  border: 0;
+  background: #fff;
+  cursor: pointer;
 }
 
 .content {
@@ -111,7 +118,8 @@ body {
 }
 
 .pinned-close {
-  margin-left: 20px
+  margin-left: 20px;
+  cursor: pointer;
 }
 
 
@@ -145,8 +153,8 @@ body {
   justify-content: flex-end;
 }
 
-.message-pin {
-  margin-right: 4px;
+.message_link-icon {
+  margin-right: 8px;
   text-decoration: none;
   color: rgba(255,255,255,.5);
 }
@@ -160,6 +168,10 @@ body {
 }
 
 .message-wrapper.user .message-pin {
+  color:#7a7f9a;
+}
+
+.message-wrapper.user .message-favourites {
   color:#7a7f9a;
 }
 

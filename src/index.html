@@ -13,7 +13,11 @@
     <div class="title padding">
       <div class="title-row">
           <div class="title-wrapper">Дневник записей</div>
-          <div class="title-btn-wrapper"></div>
+          <div class="title-btn-wrapper">
+              <button class="title-favs-button title-button"><i class="fa-solid fa-star fa-lg"></i></button>
+              <button class="title-search-button title-button"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+
+          </div>
       </div>
     </div>
     <div class="pinned-message hidden" id="pinned-message">
@@ -21,9 +25,9 @@
             <div class="pinned-title">Закрепленное сообщение</div>
             <div class="pinned-text">На странице с заданием вы найдете подробную инструкцию На странице с заданием вы найдете подробную инструкцию</div>
         </div>
-        <div class="pinned-close">x</div>
+        <div class="pinned-close"><i class="fa-solid fa-xmark"></i></div>
     </div>
-    <div class="search-wrapper padding">
+    <div class="search-wrapper padding hidden">
         <form id="search-message-form">
             <div class="search-row">
                 <div class="search-input-wrapper">
@@ -54,7 +58,8 @@
             <div class="message-text">На странице с заданием вы найдете подробную инструкцию по его выполнению.
                 Там же даны все необходимые рекомендации.</div>
             <div class="message-footer">
-                <a href="#" class="message-pin">Закрепить</a>
+                <a href="#" class="message-favourites message_link-icon"><i class="fa-solid fa-star"></i></a>
+                <a href="#" class="message-pin message_link-icon"><i class="fa-solid fa-thumbtack"></i></a>
                 <div class="message-date">22:05</div>
             </div>
         </div>

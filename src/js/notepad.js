@@ -5,6 +5,9 @@ function transformTextContent(content) {
   return content.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
 }
 
+const TITLE_MAIN = 'Дневник записей';
+const TITLE_FAVOURITES = 'Избранное';
+
 export async function runNotepad() {
   const state = {
     messages: [],
@@ -21,6 +24,10 @@ export async function runNotepad() {
   const closePinEl = document.querySelector('.pinned-close');
   const clearInputEl = document.querySelector('.input-clear');
   const cancelSearchEl = document.querySelector('.cancel-btn');
+  const searchIconEl = document.querySelector('.title-search-button');
+  const favouritesIconEl = document.querySelector('.title-favs-button');
+  const searchBlockEl = document.querySelector('.search-wrapper');
+  const titleEl = document.querySelector('.title-wrapper');
 
 
   function drawPinnedMessage(message) {
@@ -36,18 +43,22 @@ export async function runNotepad() {
     const dateEl = document.createElement('div');
     const footerEl = document.createElement('div');
     const pinEl = document.createElement('a');
+    const favEl = document.createElement('a');
 
     wrapperEl.classList.add('message-wrapper');
     wrapperEl.dataset.id = message.id;
     messageEl.classList.add('message');
     textEl.classList.add('message-text');
     footerEl.classList.add('message-footer');
-    pinEl.classList.add('message-pin');
-    pinEl.textContent = 'Закрепить';
+    pinEl.classList.add('message-pin', 'message_link-icon');
+    pinEl.innerHTML = `<i class="fa-solid fa-thumbtack"></i>`;
     pinEl.href = '#';
+    favEl.classList.add('message-favourites', 'message_link-icon');
+    favEl.href = '#';
+    favEl.innerHTML = `<i class="fa-solid fa-star"></i>`;
     dateEl.classList.add('message-date');
 
-    footerEl.append(pinEl, dateEl);
+    footerEl.append(favEl, pinEl, dateEl);
     messageEl.append(textEl, footerEl);
     wrapperEl.append(messageEl);
 
@@ -90,7 +101,16 @@ export async function runNotepad() {
       drawPinnedMessage(result);
     }
 
+    async function addMessageToFavourites(e) {
+      e.preventDefault();
+
+      const result = await api.addMessageToFavourites(message);
+      favEl.hidden = true;
+      state.favourites = result;
+    }
+
     pinEl.addEventListener('click', pinMessage);
+    favEl.addEventListener('click', addMessageToFavourites);
 
     return wrapperEl;
   }
@@ -120,6 +140,7 @@ export async function runNotepad() {
 
   async function searchMessage(e) {
     e.preventDefault();
+    pinnedEl.classList.add('hidden');
     if (!inputSearchEl) {
       return;
     }
@@ -178,6 +199,31 @@ export async function runNotepad() {
   function onCancelSearch(e) {
     e.preventDefault();
     clearSearchingResults();
+    searchBlockEl.classList.add('hidden');
+    pinnedEl.classList.remove('hidden');
+  }
+
+  function onSearchIconClick() {
+    if (searchBlockEl.classList.contains('hidden')) {
+      searchBlockEl.classList.remove('hidden');
+      pinnedEl.classList.add('hidden');
+    } else {
+      searchBlockEl.classList.add('hidden');
+      if (state.pinnedMessage.id) {
+        pinnedEl.classList.remove('hidden');
+      }
+    }
+  }
+
+  function onFavouritesIconClick() {
+    pinnedEl.hidden = true;
+    titleEl.innerHTML = TITLE_FAVOURITES;
+    contentEl.innerHTML = '';
+    contentEl.append(...state.favourites.map((message) => drawMessage(message)));
+    /*нажала на Иконку избранное, в главном окне открылась страничка с избранными сообщениями.
+    В заголовке отобразиться Избранное.
+    Нажала еще раз - вернуться назад на все сообщения, в заголовке - Все записи
+    Если ничего в избранном нет, сообщение Папка Избранное пуста*/
   }
 
   closePinEl.addEventListener('click', onClosePin);
@@ -186,6 +232,8 @@ export async function runNotepad() {
   clearInputEl.addEventListener('click', cleanSearchInput);
   formSearchEl.addEventListener('submit', searchMessage);
   cancelSearchEl.addEventListener('click', onCancelSearch);
+  searchIconEl.addEventListener('click', onSearchIconClick);
+  favouritesIconEl.addEventListener('click', onFavouritesIconClick);
 
   const data = await Promise.all([api.fetchMessages(), api.fetchPinnedMessage()]);
   state.messages = data[0];

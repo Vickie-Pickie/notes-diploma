@@ -18,6 +18,17 @@ export const pinMessage = async (message) => {
   return await response.json();
 };
 
+export const addMessageToFavourites = async (message) => {
+  const response = await fetch('https://chat-diploma.herokuapp.com/favourites', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(message)
+  });
+  return await response.json();
+};
+
 export const sendMessage = async (message) => {
   const response = await fetch('https://chat-diploma.herokuapp.com/messages', {
     method: 'POST',
