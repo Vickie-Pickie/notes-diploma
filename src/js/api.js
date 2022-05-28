@@ -1,6 +1,13 @@
 export const fetchMessages = async () => {
   try {
-    let response = await fetch('https://chat-diploma.herokuapp.com/messages');
+    const query = new URLSearchParams({
+      _page: 1,
+      _limit: 15,
+      _sort: 'id',
+      _order: 'desc',
+    });
+
+    let response = await fetch(`https://chat-diploma.herokuapp.com/messages?${query.toString()}`);
     return response.json();
   } catch(error) {
     console.log(error);
@@ -57,4 +64,13 @@ export const fetchSearchingMessage = async (text) => {
   } catch(error) {
     console.log(error);
   }
-}
+};
+
+export const fetchFavouritesMessages = async () => {
+  try {
+    let response = await fetch('https://chat-diploma.herokuapp.com/favourites');
+    return response.json();
+  } catch(error) {
+    console.log(error);
+  }
+};
