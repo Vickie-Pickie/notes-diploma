@@ -12,6 +12,10 @@ export async function runNotepad() {
     pinnedMessage: {},
     favourites: [],
     component: COMPONENT_MESSAGES,
+    page: 1,
+    limit: 15,
+    isLoading: false,
+    isFinishedMessages: false,
   };
 
   const drawer = createDrawer();
@@ -20,7 +24,7 @@ export async function runNotepad() {
   createFavourites(drawer, state);
   const { drawPinnedMessage } = createPinnedMessage(drawer, state);
 
-  const data = await Promise.all([api.fetchMessages(), api.fetchPinnedMessage(), api.fetchFavouritesMessages()]);
+  const data = await Promise.all([api.fetchMessages(state.page, state.limit), api.fetchPinnedMessage(), api.fetchFavouritesMessages()]);
   state.messages = data[0];
   state.pinnedMessage = data[1];
   state.favourites = data[2];
@@ -30,4 +34,19 @@ export async function runNotepad() {
   if (state.pinnedMessage.id) {
     drawPinnedMessage(state.pinnedMessage);
   }
+
+  drawer.contentEl.addEventListener('scroll', async (e) => {
+    if (e.target.scrollTop > 250 || state.isLoading || state.isFinishedMessages) {
+      return;
+    }
+    state.isLoading = true;
+    state.page += 1;
+    const messages = await api.fetchMessages(state.page, state.limit);
+    if (messages.length < state.limit) {
+      state.isFinishedMessages = true;
+    }
+    drawer.prependMessages(messages);
+    state.messages.push(...messages);
+    state.isLoading = false;
+  });
 }

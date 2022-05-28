@@ -53,10 +53,14 @@ const createDrawer = () => {
     return contentEl.querySelector(`[data-id="${id}"]`);
   };
 
+  const prependMessages = (messages) => {
+    messages.map((message) => drawMessage(message)).forEach((el) => contentEl.prepend(el));
+  };
+
   const drawMessageList = (messages) => {
     contentEl.innerHTML = '';
-    contentEl.append(...messages.map((message) => drawMessage(message)));
-    contentEl.scrollTop = contentEl.offsetHeight;
+    messages.map((message) => drawMessage(message)).forEach((el) => contentEl.prepend(el));
+    contentEl.scrollTop = contentEl.scrollHeight;
   };
 
   const drawNoMessages = (text) => {
@@ -65,10 +69,12 @@ const createDrawer = () => {
 
   const appendMessage = (message) => {
     contentEl.append(drawMessage(message));
-    contentEl.scrollTop = contentEl.offsetHeight;
+    contentEl.scrollTop = contentEl.scrollHeight;
   };
 
   return {
+    contentEl,
+    prependMessages,
     addMessageCallback,
     appendMessage,
     drawMessage,

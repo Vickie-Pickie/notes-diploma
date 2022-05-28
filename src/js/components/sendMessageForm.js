@@ -21,7 +21,7 @@ const createSendMessageForm = (drawer, state) => {
 
       inputSendEl.value = '';
       drawer.appendMessage(result);
-      state.messages.push(result);
+      state.messages.unshift(result);
     } catch(error) {
       console.log(error);
     }

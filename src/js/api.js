@@ -1,8 +1,8 @@
-export const fetchMessages = async () => {
+export const fetchMessages = async (page, limit) => {
   try {
     const query = new URLSearchParams({
-      _page: 1,
-      _limit: 15,
+      _page: page,
+      _limit: limit,
       _sort: 'id',
       _order: 'desc',
     });
@@ -59,7 +59,12 @@ export const fetchPinnedMessage = async () => {
 
 export const fetchSearchingMessage = async (text) => {
   try {
-    let response = await fetch(`https://chat-diploma.herokuapp.com/messages?q=${text}`);
+    const query = new URLSearchParams({
+       q: text,
+      _sort: 'id',
+      _order: 'desc',
+    });
+    let response = await fetch(`https://chat-diploma.herokuapp.com/messages?${query.toString()}`);
     return response.json();
   } catch(error) {
     console.log(error);
