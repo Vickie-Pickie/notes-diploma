@@ -31,15 +31,14 @@ const createFavourites = (drawer, state) => {
   const addMessageToFavourites = async (e, { message, messageEl }) => {
     e.preventDefault();
 
-    const result = await api.addMessageToFavourites(message);
+    await api.addMessageToFavourites(message);
     messageEl.querySelector('.message-favourites').hidden = true;
-    state.favourites.push(result);
   };
 
   drawer.addMessageCallback((ctx) => {
     const { message, messageEl } = ctx;
     const favEl = messageEl.querySelector('.message-favourites');
-    if (state.favourites.findIndex((item) => item.id === message.id) !== -1) {
+    if (message.isFavourite) {
       favEl.hidden = true;
     }
 

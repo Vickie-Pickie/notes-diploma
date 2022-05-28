@@ -26,8 +26,9 @@ export const pinMessage = async (message) => {
 };
 
 export const addMessageToFavourites = async (message) => {
-  const response = await fetch('https://chat-diploma.herokuapp.com/favourites', {
-    method: 'POST',
+  message.isFavourite = true;
+  const response = await fetch(`https://chat-diploma.herokuapp.com/messages/${message.id}`, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
     },
@@ -73,7 +74,7 @@ export const fetchSearchingMessage = async (text) => {
 
 export const fetchFavouritesMessages = async () => {
   try {
-    let response = await fetch('https://chat-diploma.herokuapp.com/favourites');
+    let response = await fetch('https://chat-diploma.herokuapp.com/messages?isFavourites=1');
     return response.json();
   } catch(error) {
     console.log(error);
