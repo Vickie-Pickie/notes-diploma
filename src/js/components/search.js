@@ -52,7 +52,9 @@ const createSearch = (drawer, state) => {
     clearSearchingResults();
 
     searchBlockEl.classList.add('hidden');
-    pinnedEl.classList.remove('hidden');
+    if (state.pinnedMessage.id) {
+      pinnedEl.classList.remove('hidden');
+    }
   };
 
   const onSearchIconClick = () => {

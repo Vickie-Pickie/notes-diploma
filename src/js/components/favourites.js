@@ -10,7 +10,7 @@ const createFavourites = (drawer, state) => {
   const favouritesIconEl = document.querySelector('.title-favs-button');
   const titleEl = document.querySelector('.title-wrapper');
 
-  const onFavouritesIconClick = () => {
+  const onFavouritesIconClick = async () => {
     if (state.component === COMPONENT_FAVOURITES) {
       titleEl.innerHTML = TITLE_MAIN;
       state.component = COMPONENT_MESSAGES;
@@ -21,11 +21,15 @@ const createFavourites = (drawer, state) => {
 
     titleEl.innerHTML = TITLE_FAVOURITES;
     state.component = COMPONENT_FAVOURITES;
-    if (!state.favourites.length) {
+    state.favourites.page = 1;
+    state.favourites.isFinishedMessages = false;
+    state.favourites.messages = await api.fetchFavouritesMessages(state.favourites.page, state.favourites.limit);
+
+    if (!state.favourites.messages.length) {
       drawer.drawNoMessages('Папка Избранное пуста');
     }
 
-    drawer.drawMessageList(state.favourites);
+    drawer.drawMessageList(state.favourites.messages);
   };
 
   const addMessageToFavourites = async (e, { message, messageEl }) => {
