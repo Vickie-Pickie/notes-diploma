@@ -206,16 +206,17 @@ body {
   color: rgba(255,255,255,.5);
 }
 
-.message-wrapper.user .message-date {
+.message-wrapper.user .message-date,
+.message-wrapper.user .message-pin,
+.message-wrapper.user .message-favourites,
+.message-wrapper.user .message-download
+{
   color:#7a7f9a;
 }
 
-.message-wrapper.user .message-pin {
-  color:#7a7f9a;
-}
-
-.message-wrapper.user .message-favourites {
-  color:#7a7f9a;
+.message-image {
+  max-width: 300px;
+  max-height: 250px;
 }
 
 .hidden {

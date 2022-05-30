@@ -27,6 +27,19 @@ const createDrawer = () => {
     dateEl.classList.add('message-date');
 
     footerEl.append(favEl, pinEl, dateEl);
+
+    let src;
+    if (message.type === 'image' || message.type === 'audio' || message.type === 'video') {
+      src = `https://chat-diploma.herokuapp.com${message.content.fileName}`;
+      const downloadEl = document.createElement('a');
+      downloadEl.innerHTML =`<i class="fa-solid fa-download"></i>`;
+      downloadEl.href = src;
+      downloadEl.download = message.content.originalName;
+      downloadEl.target = '_blank';
+      downloadEl.classList.add('message-download', 'message_link-icon');
+      footerEl.insertBefore(downloadEl, dateEl);
+    }
+
     messageEl.append(textEl, footerEl);
     wrapperEl.append(messageEl);
 
@@ -36,7 +49,22 @@ const createDrawer = () => {
       wrapperEl.classList.add('bot');
     }
 
-    textEl.innerHTML = transformTextContent(message.content);
+    if (message.type === 'text') {
+      textEl.innerHTML = transformTextContent(message.content);
+    }
+
+    if (message.type === 'image') {
+      textEl.innerHTML = `<img src="${src}" class="message-image" />`;
+    }
+
+    if (message.type === 'audio') {
+      textEl.innerHTML = `<audio controls src="${src}"></audio>`;
+    }
+
+    if (message.type === 'video') {
+      textEl.innerHTML = `<video controls width="300" src="${src}"></video>`
+    }
+
     dateEl.innerHTML = buildMessageDate(message.timestamp);
 
     const ctx = { message, messageEl: wrapperEl };
