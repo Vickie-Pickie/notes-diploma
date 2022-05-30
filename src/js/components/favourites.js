@@ -27,9 +27,9 @@ const createFavourites = (drawer, state) => {
 
     if (!state.favourites.messages.length) {
       drawer.drawNoMessages('Папка Избранное пуста');
+    } else {
+      drawer.drawMessageList(state.favourites.messages);
     }
-
-    drawer.drawMessageList(state.favourites.messages);
   };
 
   const addMessageToFavourites = async (e, { message, messageEl }) => {

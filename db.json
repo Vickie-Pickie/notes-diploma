@@ -39,6 +39,16 @@
       "timestamp": 1653107913930,
       "id": 5,
       "isFavourite": false
+    },
+    {
+      "type": "image",
+      "content": {
+        "fileName": "/uploads/file-1653904640790-682442780.jpeg",
+        "originalName": "cute_kit.jpeg"
+      },
+      "author": "user",
+      "timestamp": 1653904640798,
+      "id": 6
     }
   ],
   "pinnedMessage": {

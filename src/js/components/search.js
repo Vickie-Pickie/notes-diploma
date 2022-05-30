@@ -58,6 +58,8 @@ const createSearch = (drawer, state) => {
   };
 
   const onSearchIconClick = () => {
+    inputSearchEl.value = '';
+    clearInputEl.classList.add('hidden');
     if (searchBlockEl.classList.contains('hidden')) {
       searchBlockEl.classList.remove('hidden');
       pinnedEl.classList.add('hidden');
@@ -70,10 +72,19 @@ const createSearch = (drawer, state) => {
     }
   };
 
+  const onInputSearch = (e) => {
+    if (e.target.value) {
+      clearInputEl.classList.remove('hidden');
+    } else {
+      clearInputEl.classList.add('hidden');
+    }
+  };
+
   clearInputEl.addEventListener('click', cleanSearchInput);
   formSearchEl.addEventListener('submit', searchMessage);
   cancelSearchEl.addEventListener('click', onCancelSearch);
   searchIconEl.addEventListener('click', onSearchIconClick);
+  inputSearchEl.addEventListener('input', onInputSearch);
 };
 
 export default createSearch;

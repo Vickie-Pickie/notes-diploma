@@ -48,6 +48,7 @@ body {
   border: 0;
   background: #fff;
   cursor: pointer;
+  color: #495057;
 }
 
 .content {
@@ -63,31 +64,49 @@ body {
   display: flex;
 }
 
-.submit-btn {
+.send-form__submit-btn {
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 8px;
   color: #fff;
   background-color: #7269ef;
   border: 1px solid #7269ef;
-  padding: 5px 10px;
+  padding:  8px 15px;
+}
+
+.send-inputs-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.send-form-label {
+  margin-right: 10px;
+  cursor: pointer;
+  color: #495057;
+}
+
+.text-input {
+  width: 100%;
   height: 100%;
 }
-
-.send-input-wrapper {
-  flex: 1;
-  margin-right: 12px;
-}
-
-.send-input-control {
+.send-message-control {
   background-color: #e6ebf5;
   border: 1px solid #e6ebf5;
   padding: 5px 10px;
   font-size: 12px;
-  border-radius: 2px;
+  border-radius: 8px;
   font-weight: 400;
   line-height: 1.5;
   color:  #495057;
   width: 100%;
+  height: 100%;
+}
+
+.send-audio-control,
+.send-video-control,
+.send-picture-control{
+  display: none;
+  margin-right: 4px;
 }
 
 .pinned-message {
@@ -136,6 +155,11 @@ body {
 .message-wrapper.user .message {
   background: #f5f7fb;;
   color: #212529;
+  border-radius: 8px 8px 0 8px;
+}
+
+.message-wrapper.bot .message {
+  border-radius: 8px 8px 8px 0;
 }
 
 .message {
@@ -143,9 +167,28 @@ body {
   background: #7269ef;
   color: #fff;
   padding: 8px;
-  border-radius: 4px;
+  position: relative;
 }
 
+.message-wrapper.bot .message:before {
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-left-color: #7269ef;
+  border-top-color: #7269ef;
+  left: 0;
+  bottom: -10px;
+}
+
+.message-wrapper.user .message:before {
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top-color: #f5f7fb;
+  border-right-color: #f5f7fb;
+  right: 0;
+  bottom: -10px;
+}
 .message-footer {
   display: flex;
   font-size: 10px;
@@ -190,11 +233,11 @@ body {
   display: flex;
   flex: 1;
   margin-right: 8px;
-  background-color: #fff;
+  background-color: #e6ebf5;
   border: 1px solid #e6ebf5;
   padding: 5px 10px;
   font-size: 12px;
-  border-radius: 4px;
+  border-radius: 8px;
   font-weight: 400;
   color: #495057;
 }
@@ -203,25 +246,27 @@ body {
   width: 100%;
   border: 0;
   line-height: 1.5;
+  background-color: #e6ebf5;
 }
 .search-btn-wrapper {
 
 }
-.search-input-control:focus, .send-input-control:focus {
+.search-input-control:focus,
+.send-message-control:focus {
   outline: none;
 }
 
 .input-clear {
   border: 0;
-  background: #fff;
+  background: #e6ebf5;
   cursor: pointer;
 }
 .search-buttons {
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 8px;
   color: #495057;
   background-color: #f5f7fb;;
-  border: 1px solid #e6ebf5;
+  border: 1px solid #f5f7fb;
   padding: 5px 10px;
   height: 100%;
 }

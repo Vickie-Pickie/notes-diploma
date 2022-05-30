@@ -14,9 +14,21 @@
       <div class="title-row">
           <div class="title-wrapper">Дневник записей</div>
           <div class="title-btn-wrapper">
-              <button class="title-favs-button title-button"><i class="fa-solid fa-star fa-lg"></i></button>
-              <button class="title-search-button title-button"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
-
+              <button class="title-image-button title-button">
+                  <i class="fa-solid fa-image fa-lg"></i>
+              </button>
+              <button class="title-audio-button title-button">
+                  <i class="fa-solid fa-music fa-lg"></i>
+              </button>
+              <button class="title-video-button title-button">
+                  <i class="fa-solid fa-video fa-lg"></i>
+              </button>
+              <button class="title-favs-button title-button">
+                    <i class="fa-solid fa-star fa-lg"></i>
+                </button>
+              <button class="title-search-button title-button">
+                    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+              </button>
           </div>
       </div>
     </div>
@@ -31,15 +43,16 @@
         <form id="search-message-form">
             <div class="search-row">
                 <div class="search-input-wrapper">
-                    <input name="search" type="text" class="search-input-control" placeholder="Искать в заметках" />
-                    <button class="input-clear hidden">x</button>
+                    <input name="search" type="text" class="search-input-control" placeholder="Искать в записях" />
+                    <button class="input-clear hidden">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </div>
                 <div class="search-buttons-wrapper">
                     <button type="submit" class="search-buttons search-btn">Найти</button>
                     <button class="search-buttons cancel-btn">Отмена</button>
                 </div>
             </div>
-
         </form>
     </div>
     <div class="content padding" id="messages">
@@ -66,13 +79,29 @@
     </div>
     </div>
     <div class="footer padding">
-      <form id="send-message-form">
+      <form id="send-form">
           <div class="footer-row">
-              <div class="send-input-wrapper">
-                  <input name="send" type="text" class="send-input-control" placeholder="Enter message..." />
+              <div class="send-inputs-wrapper">
+                  <label class="send-form-label text-input">
+                      <input name="message" type="text" class="send-message-control" placeholder="Напишите что-нибудь..." />
+                  </label>
+                  <label class="send-form-label image-input">
+                      <input name="image" type="file" class="send-picture-control" accept="image/*" multiple />
+                      <i class="fa-solid fa-image fa-xl""></i>
+                  </label>
+                  <label class="send-form-label audio-input">
+                      <input name="audio" type="file" class="send-audio-control" accept="audio/*" multiple />
+                      <i class="fa-solid fa-music fa-xl""></i>
+                  </label>
+                  <label class="send-form-label video-input">
+                      <input name="video" type="file" class="send-video-control" accept="video/*" multiple />
+                      <i class="fa-solid fa-video fa-xl"></i>
+                  </label>
               </div>
               <div class="footer-btn-wrapper">
-                  <button type="submit" class="submit-btn">Отправить</button>
+                  <button type="submit" class="send-form__submit-btn">
+                      <i class="fa-solid fa-paper-plane "></i>
+                  </button>
               </div>
           </div>
       </form>

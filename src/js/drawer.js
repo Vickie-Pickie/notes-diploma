@@ -37,7 +37,7 @@ const createDrawer = () => {
     }
 
     textEl.innerHTML = transformTextContent(message.content);
-    dateEl.textContent = buildMessageDate(message.timestamp);
+    dateEl.innerHTML = buildMessageDate(message.timestamp);
 
     const ctx = { message, messageEl: wrapperEl };
     messageCallbacks.forEach((cb) => cb(ctx));
