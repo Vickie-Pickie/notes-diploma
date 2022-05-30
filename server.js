@@ -28,6 +28,7 @@ const saveMedia = (type, req, res) => {
     },
     author: 'user',
     timestamp: Date.now(),
+    isFavourite: false
   }).value();
 
   router.db.write();
@@ -54,6 +55,7 @@ server.get('/command', (req, res) => {
     content: 'Bot response',
     author: 'bot',
     timestamp: Date.now(),
+    isFavourite: false
   }).value();
 
   router.db.write();

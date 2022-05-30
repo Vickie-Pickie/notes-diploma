@@ -96,3 +96,19 @@ export const fetchFavouritesMessages = async (page, limit) => {
     console.log(error);
   }
 };
+
+export const fetchMessagesByType = async (type,page, limit) => {
+  try {
+    const query = new URLSearchParams({
+      _page: page,
+      _limit: limit,
+      _sort: 'id',
+      _order: 'desc',
+      type: type
+    });
+    let response = await fetch(`https://chat-diploma.herokuapp.com/messages?${query.toString()}`);
+    return response.json();
+  } catch(error) {
+    console.log(error);
+  }
+};

@@ -4,7 +4,15 @@ import createFavourites from "./components/favourites";
 import createPinnedMessage from "./components/pinnedMessage";
 import createSearch from "./components/search";
 import createSendMessageForm from "./components/sendMessageForm";
-import {COMPONENT_FAVOURITES, COMPONENT_MESSAGES} from "./constants";
+import {
+  COMPONENT_AUDIOS,
+  COMPONENT_FAVOURITES,
+  COMPONENT_IMAGES,
+  COMPONENT_MESSAGES, COMPONENT_TEXT, COMPONENT_VIDEOS,
+  TITLE_AUDIOS,
+  TITLE_IMAGES, TITLE_TEXT, TITLE_VIDEOS
+} from "./constants";
+import createCategories from "./components/categories";
 
 export async function runNotepad() {
   const state = {
@@ -17,6 +25,13 @@ export async function runNotepad() {
     isFinishedMessages: false,
     filter: {},
     favourites: {
+      messages: [],
+      page: 1,
+      limit: 15,
+      isLoading: false,
+      isFinishedMessages: false,
+    },
+    category: {
       messages: [],
       page: 1,
       limit: 15,
@@ -36,6 +51,30 @@ export async function runNotepad() {
   createSendMessageForm(drawer, state);
   createSearch(drawer, state);
   createFavourites(drawer, state);
+  createCategories({
+    iconEl: document.querySelector('.title-image-button'),
+    component: COMPONENT_IMAGES,
+    title: TITLE_IMAGES,
+    type: 'image',
+  }, drawer, state);
+  createCategories({
+    iconEl: document.querySelector('.title-audio-button'),
+    component: COMPONENT_AUDIOS,
+    title: TITLE_AUDIOS,
+    type: 'audio',
+  }, drawer, state);
+  createCategories({
+    iconEl: document.querySelector('.title-video-button'),
+    component: COMPONENT_VIDEOS,
+    title: TITLE_VIDEOS,
+    type: 'video',
+  }, drawer, state);
+  createCategories({
+    iconEl: document.querySelector('.title-text-button'),
+    component: COMPONENT_TEXT,
+    title: TITLE_TEXT,
+    type: 'text',
+  }, drawer, state);
   const { drawPinnedMessage } = createPinnedMessage(drawer, state);
 
   const data = await Promise.all([api.fetchMessages(state.page, state.limit), api.fetchPinnedMessage()]);

@@ -48,7 +48,8 @@
       },
       "author": "user",
       "timestamp": 1653904640798,
-      "id": 6
+      "id": 6,
+      "isFavourite": false
     }
   ],
   "pinnedMessage": {
