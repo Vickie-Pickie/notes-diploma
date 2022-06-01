@@ -110,18 +110,34 @@ body {
 }
 
 .pinned-message {
-  padding: 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #fff;
   border-bottom: 1px solid #f0eff5;
+  color: #495057;
 }
 
 .pinned-content {
+  display: flex;
+  align-items: center;
   font-size: 14px;
   flex: 1;
   overflow: hidden;
+}
+
+.pinned-data {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.pinned-pic {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pinned-title {
@@ -136,8 +152,17 @@ body {
   text-overflow: ellipsis;
 }
 
+.pinned-text__link {
+  text-decoration: none;
+  color: #495057;
+}
+
+.pinned-text__link:visited {
+  color: #495057;
+  text-decoration: none;
+}
+
 .pinned-close {
-  margin-left: 20px;
   cursor: pointer;
 }
 

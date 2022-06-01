@@ -13,3 +13,12 @@ export const COMPONENT_VIDEOS = 'videoMessages';
 export const COMPONENT_AUDIOS = 'audioMessages';
 export const COMPONENT_IMAGES = 'imageMessages';
 export const COMPONENT_TEXT = 'textMessages';
+
+export const COMMANDS = [
+  'список',
+  'погода',
+  'курс валют',
+  'гороскоп',
+  'время',
+  'праздники',
+];

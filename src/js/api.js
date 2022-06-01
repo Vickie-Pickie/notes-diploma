@@ -49,6 +49,18 @@ export const sendMessage = async (message) => {
   return await response.json();
 };
 
+export const sendCommand = async (message) => {
+  const response = await fetch('https://chat-diploma.herokuapp.com/command', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify({ message }),
+  });
+
+  return await response.json();
+};
+
 export const uploadMedia = async (type, formData) => {
   const response = await fetch(`https://chat-diploma.herokuapp.com/upload/${type}`, {
     method: 'POST',

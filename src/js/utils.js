@@ -18,3 +18,12 @@ export function buildMessageDate(timestamp) {
 
   return `${hours}:${minutes}`;
 }
+
+export function extractCommandName(message) {
+  const commandParts = message.split('@chaos:');
+  if (!commandParts[1]) {
+    return '';
+  }
+
+  return commandParts[1].trim().toLowerCase();
+}

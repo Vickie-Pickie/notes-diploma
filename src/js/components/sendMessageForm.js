@@ -1,4 +1,6 @@
 import * as api from "../api";
+import {COMMANDS} from "../constants";
+import {extractCommandName} from "../utils";
 
 const createSendMessageForm = (drawer, state) => {
   const formSendEl = document.getElementById('send-form');
@@ -12,6 +14,11 @@ const createSendMessageForm = (drawer, state) => {
     if (!inputSendEl.value) {
       return;
     }
+
+    const commandName = extractCommandName(inputSendEl.value);
+    if (COMMANDS.indexOf(commandName) !== -1) {
+
+   }
 
     try {
       const message = {

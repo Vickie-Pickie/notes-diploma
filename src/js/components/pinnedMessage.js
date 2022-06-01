@@ -8,8 +8,33 @@ const createPinnedMessage = (drawer, state) => {
   const drawPinnedMessage = (message) => {
     pinnedEl.classList.remove('hidden');
     const pinnedContent = pinnedEl.querySelector('.pinned-text');
-    pinnedContent.innerHTML = transformTextContent(message.content);
-  }
+    const pinnedPicIcon = pinnedEl.querySelector('.pinned-pic');
+    let src;
+    if (message.type === 'audio' || message.type === 'video' || message.type === 'image') {
+      if (message.type === 'image') {
+        pinnedPicIcon.innerHTML = `<i class="fa-solid fa-image fa-2xl"></i>`;
+      }
+
+      if (message.type === 'audio') {
+        pinnedPicIcon.innerHTML = `<i class="fa-solid fa-music fa-2xl"></i>`;
+      }
+
+      if (message.type === 'video') {
+        pinnedPicIcon.innerHTML = `<i class="fa-solid fa-video fa-2xl"></i>`;
+      }
+
+      src = `https://chat-diploma.herokuapp.com${message.content.fileName}`;
+      const mediaLink = document.createElement('a');
+      mediaLink.classList.add('pinned-text__link');
+      mediaLink.href = src;
+      mediaLink.target = '_blank';
+      mediaLink.innerHTML = `${message.type}`;
+      pinnedContent.replaceChildren(mediaLink);
+    } else {
+      pinnedPicIcon.innerHTML = `<i class="fa-solid fa-file-lines fa-2xl"></i>`;
+      pinnedContent.innerHTML = transformTextContent(message.content);
+    }
+  };
 
   const displayMessagePinIcon = (messageId) => {
     const prevPinMessage = drawer.findMessageByDataId(messageId);
