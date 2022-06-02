@@ -17,7 +17,15 @@ const createSendMessageForm = (drawer, state) => {
 
     const commandName = extractCommandName(inputSendEl.value);
     if (COMMANDS.indexOf(commandName) !== -1) {
-
+      try {
+        let result = await api.sendCommand(inputSendEl.value);
+        console.log(result);
+        inputSendEl.value = '';
+        result.forEach((message) => drawer.appendMessage(message));
+        state.messages.unshift(...result);
+      } catch(error) {
+        console.log(error);
+      }
    }
 
     try {
