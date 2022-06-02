@@ -26,18 +26,31 @@ const createSendMessageForm = (drawer, state) => {
       } catch(error) {
         console.log(error);
       }
-   }
+   } else {
+      try {
+        const message = {
+          type: 'text',
+          content: inputSendEl.value,
+          author: 'user',
+          timestamp: Date.now(),
+        };
+        let result = await api.sendMessage(message);
 
+        inputSendEl.value = '';
+        drawer.appendMessage(result);
+        state.messages.unshift(result);
+      } catch(error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const attachFile = async (type, file) => {
     try {
-      const message = {
-        type: 'text',
-        content: inputSendEl.value,
-        author: 'user',
-        timestamp: Date.now(),
-      };
-      let result = await api.sendMessage(message);
+      const formData = new FormData();
+      formData.append('file', file);
+      let result = await api.uploadMedia(type, formData);
 
-      inputSendEl.value = '';
       drawer.appendMessage(result);
       state.messages.unshift(result);
     } catch(error) {
@@ -45,49 +58,40 @@ const createSendMessageForm = (drawer, state) => {
     }
   };
 
-  const attachImage = async (e) => {
-    try {
-      const formData = new FormData();
-      formData.append('file', e.target.files[0]);
-      let result = await api.uploadMedia('image', formData);
-
-      drawer.appendMessage(result);
-      state.messages.unshift(result);
-    } catch(error) {
-      console.log(error);
-    }
+  const attachImage = (e) => {
+    attachFile('image', e.target.files[0]);
   };
 
   const attachAudio = async (e) => {
-    try {
-      const formData = new FormData();
-      formData.append('file', e.target.files[0]);
-      let result = await api.uploadMedia('audio', formData);
-
-      drawer.appendMessage(result);
-      state.messages.unshift(result);
-    } catch(error) {
-      console.log(error);
-    }
+    attachFile('audio', e.target.files[0]);
   };
 
   const attachVideo = async (e) => {
-    try {
-      const formData = new FormData();
-      formData.append('file', e.target.files[0]);
-      let result = await api.uploadMedia('video', formData);
+    attachFile('video', e.target.files[0]);
+  };
 
-      drawer.appendMessage(result);
-      state.messages.unshift(result);
-    } catch(error) {
-      console.log(error);
+  const handleDropFile = (e) => {
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer.files);
+    if (!files.length) {
+      return;
     }
+
+    files.forEach(async (file) => {
+      const typeParts = file.type.split('/');
+      if (['audio', 'image', 'video'].indexOf(typeParts[0]) === -1) {
+        return;
+      }
+      attachFile(typeParts[0], file);
+    });
   };
 
   formSendEl.addEventListener("submit", sendMessage);
   inputImageEl.addEventListener('change', attachImage);
   inputAudioEl.addEventListener('change', attachAudio);
   inputVideoEl.addEventListener('change', attachVideo);
+  drawer.contentEl.addEventListener('drop', handleDropFile);
+  drawer.contentEl.addEventListener('dragover', (e) => e.preventDefault());
 };
 
 export default createSendMessageForm;

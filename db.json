@@ -50,6 +50,28 @@
       "timestamp": 1653904640798,
       "id": 6,
       "isFavourite": false
+    },
+    {
+      "type": "image",
+      "content": {
+        "fileName": "/uploads/file-1654162347229-332599946.mp4",
+        "originalName": "video_sample.mp4"
+      },
+      "author": "user",
+      "timestamp": 1654162347469,
+      "isFavourite": false,
+      "id": 7
+    },
+    {
+      "type": "audio",
+      "content": {
+        "fileName": "/uploads/file-1654162382390-296292241.wav",
+        "originalName": "mixkit-fast-rocket-whoosh-1714.wav"
+      },
+      "author": "user",
+      "timestamp": 1654162382405,
+      "isFavourite": false,
+      "id": 8
     }
   ],
   "pinnedMessage": {
