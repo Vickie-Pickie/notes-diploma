@@ -4,7 +4,6 @@ const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 3000;
 const multer  = require('multer');
-const {extractCommandName} = require("./src/js/utils");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, __dirname + '/public/uploads')
@@ -16,6 +15,15 @@ const storage = multer.diskStorage({
   }
 })
 const upload = multer({ storage });
+
+function extractCommandName(message) {
+  const commandParts = message.split('@chaos:');
+  if (!commandParts[1]) {
+    return '';
+  }
+
+  return commandParts[1].trim().toLowerCase();
+}
 
 server.use(middlewares);
 
