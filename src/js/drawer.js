@@ -1,4 +1,7 @@
-import {buildMessageDate, transformTextContent} from "./utils";
+import {
+  buildMessageDate,
+  transformTextContent,
+} from './utils';
 
 const createDrawer = () => {
   const contentEl = document.getElementById('messages');
@@ -19,11 +22,11 @@ const createDrawer = () => {
     textEl.classList.add('message-text');
     footerEl.classList.add('message-footer');
     pinEl.classList.add('message-pin', 'message_link-icon');
-    pinEl.innerHTML = `<i class="fa-solid fa-thumbtack"></i>`;
+    pinEl.innerHTML = '<i class="fa-solid fa-thumbtack"></i>';
     pinEl.href = '#';
     favEl.classList.add('message-favourites', 'message_link-icon');
     favEl.href = '#';
-    favEl.innerHTML = `<i class="fa-solid fa-star"></i>`;
+    favEl.innerHTML = '<i class="fa-solid fa-star"></i>';
     dateEl.classList.add('message-date');
 
     footerEl.append(favEl, pinEl, dateEl);
@@ -32,7 +35,7 @@ const createDrawer = () => {
     if (message.type === 'image' || message.type === 'audio' || message.type === 'video') {
       src = `https://chat-diploma.herokuapp.com${message.content.fileName}`;
       const downloadEl = document.createElement('a');
-      downloadEl.innerHTML =`<i class="fa-solid fa-download"></i>`;
+      downloadEl.innerHTML = '<i class="fa-solid fa-download"></i>';
       downloadEl.href = src;
       downloadEl.download = message.content.originalName;
       downloadEl.target = '_blank';
@@ -62,7 +65,7 @@ const createDrawer = () => {
     }
 
     if (message.type === 'video') {
-      textEl.innerHTML = `<video controls width="300" src="${src}"></video>`
+      textEl.innerHTML = `<video controls width="300" src="${src}"></video>`;
     }
 
     dateEl.innerHTML = buildMessageDate(message.timestamp);
@@ -77,9 +80,7 @@ const createDrawer = () => {
     messageCallbacks.push(cb);
   };
 
-  const findMessageByDataId = (id) => {
-    return contentEl.querySelector(`[data-id="${id}"]`);
-  };
+  const findMessageByDataId = (id) => contentEl.querySelector(`[data-id="${id}"]`);
 
   const prependMessages = (messages) => {
     messages.map((message) => drawMessage(message)).forEach((el) => contentEl.prepend(el));
@@ -108,8 +109,8 @@ const createDrawer = () => {
     drawMessage,
     drawMessageList,
     drawNoMessages,
-    findMessageByDataId
-  }
+    findMessageByDataId,
+  };
 };
 
 export default createDrawer;

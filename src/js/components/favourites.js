@@ -1,10 +1,10 @@
-import * as api from "../api";
+import * as api from '../api';
 import {
   COMPONENT_FAVOURITES,
   COMPONENT_MESSAGES,
   TITLE_FAVOURITES,
   TITLE_MAIN,
-} from "../constants";
+} from '../constants';
 
 const createFavourites = (drawer, state) => {
   const favouritesIconEl = document.querySelector('.title-favs-button');
@@ -23,7 +23,10 @@ const createFavourites = (drawer, state) => {
     state.component = COMPONENT_FAVOURITES;
     state.favourites.page = 1;
     state.favourites.isFinishedMessages = false;
-    state.favourites.messages = await api.fetchFavouritesMessages(state.favourites.page, state.favourites.limit);
+    state.favourites.messages = await api.fetchFavouritesMessages(
+      state.favourites.page,
+      state.favourites.limit,
+    );
 
     if (!state.favourites.messages.length) {
       drawer.drawNoMessages('Папка Избранное пуста');
@@ -34,7 +37,6 @@ const createFavourites = (drawer, state) => {
 
   const addMessageToFavourites = async (e, { message, messageEl }) => {
     e.preventDefault();
-
     await api.addMessageToFavourites(message);
     messageEl.querySelector('.message-favourites').hidden = true;
   };

@@ -1,20 +1,24 @@
-import * as api from "./api";
-import createDrawer from "./drawer";
-import createFavourites from "./components/favourites";
-import createPinnedMessage from "./components/pinnedMessage";
-import createSearch from "./components/search";
-import createSendMessageForm from "./components/sendMessageForm";
+import * as api from './api';
+import createDrawer from './drawer';
+import createFavourites from './components/favourites';
+import createPinnedMessage from './components/pinnedMessage';
+import createSearch from './components/search';
+import createSendMessageForm from './components/sendMessageForm';
 import {
   COMPONENT_AUDIOS,
   COMPONENT_FAVOURITES,
   COMPONENT_IMAGES,
-  COMPONENT_MESSAGES, COMPONENT_TEXT, COMPONENT_VIDEOS,
+  COMPONENT_MESSAGES,
+  COMPONENT_TEXT,
+  COMPONENT_VIDEOS,
   TITLE_AUDIOS,
-  TITLE_IMAGES, TITLE_TEXT, TITLE_VIDEOS
-} from "./constants";
-import createCategories from "./components/categories";
+  TITLE_IMAGES,
+  TITLE_TEXT,
+  TITLE_VIDEOS,
+} from './constants';
+import createCategories from './components/categories';
 
-export async function runNotepad() {
+export default async function runNotepad() {
   const state = {
     pinnedMessage: {},
     component: COMPONENT_MESSAGES,
@@ -44,7 +48,7 @@ export async function runNotepad() {
       limit: 15,
       isLoading: false,
       isFinishedMessages: false,
-    }
+    },
   };
 
   const drawer = createDrawer();
@@ -77,9 +81,12 @@ export async function runNotepad() {
   }, drawer, state);
   const { drawPinnedMessage } = createPinnedMessage(drawer, state);
 
-  const data = await Promise.all([api.fetchMessages(state.page, state.limit), api.fetchPinnedMessage()]);
-  state.messages = data[0];
-  state.pinnedMessage = data[1];
+  const [dataMessages, dataPinned] = await Promise.all([
+    api.fetchMessages(state.page, state.limit),
+    api.fetchPinnedMessage(),
+  ]);
+  state.messages = dataMessages;
+  state.pinnedMessage = dataPinned;
 
   drawer.drawMessageList(state.messages);
 
@@ -90,8 +97,7 @@ export async function runNotepad() {
   const scrollListener = async (e) => {
     const componentState = state.component === COMPONENT_MESSAGES
       ? state
-      : state[state.component]
-    ;
+      : state[state.component];
 
     if (e.target.scrollTop > 250 || componentState.isLoading || componentState.isFinishedMessages) {
       return;

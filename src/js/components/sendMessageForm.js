@@ -1,6 +1,6 @@
-import * as api from "../api";
-import {COMMANDS} from "../constants";
-import {extractCommandName} from "../utils";
+import * as api from '../api';
+import { COMMANDS } from '../constants';
+import { extractCommandName } from '../utils';
 
 const createSendMessageForm = (drawer, state) => {
   const formSendEl = document.getElementById('send-form');
@@ -18,15 +18,14 @@ const createSendMessageForm = (drawer, state) => {
     const commandName = extractCommandName(inputSendEl.value);
     if (COMMANDS.indexOf(commandName) !== -1) {
       try {
-        let result = await api.sendCommand(inputSendEl.value);
-        console.log(result);
+        const result = await api.sendCommand(inputSendEl.value);
         inputSendEl.value = '';
         result.forEach((message) => drawer.appendMessage(message));
         state.messages.unshift(...result);
-      } catch(error) {
+      } catch (error) {
         console.log(error);
       }
-   } else {
+    } else {
       try {
         const message = {
           type: 'text',
@@ -34,12 +33,12 @@ const createSendMessageForm = (drawer, state) => {
           author: 'user',
           timestamp: Date.now(),
         };
-        let result = await api.sendMessage(message);
 
+        const result = await api.sendMessage(message);
         inputSendEl.value = '';
         drawer.appendMessage(result);
         state.messages.unshift(result);
-      } catch(error) {
+      } catch (error) {
         console.log(error);
       }
     }
@@ -49,11 +48,10 @@ const createSendMessageForm = (drawer, state) => {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      let result = await api.uploadMedia(type, formData);
-
+      const result = await api.uploadMedia(type, formData);
       drawer.appendMessage(result);
       state.messages.unshift(result);
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     }
   };
@@ -86,7 +84,7 @@ const createSendMessageForm = (drawer, state) => {
     });
   };
 
-  formSendEl.addEventListener("submit", sendMessage);
+  formSendEl.addEventListener('submit', sendMessage);
   inputImageEl.addEventListener('change', attachImage);
   inputAudioEl.addEventListener('change', attachAudio);
   inputVideoEl.addEventListener('change', attachVideo);

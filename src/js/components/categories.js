@@ -1,8 +1,8 @@
-import * as api from "../api";
+import * as api from '../api';
 import {
   COMPONENT_MESSAGES,
   TITLE_MAIN,
-} from "../constants";
+} from '../constants';
 
 const createCategories = (ctx, drawer, state) => {
   const {
@@ -26,7 +26,11 @@ const createCategories = (ctx, drawer, state) => {
     state.component = component;
     state.category.page = 1;
     state.category.isFinishedMessages = false;
-    state.category.messages = await api.fetchMessagesByType(type, state.category.page, state.category.limit);
+    state.category.messages = await api.fetchMessagesByType(
+      type,
+      state.category.page,
+      state.category.limit,
+    );
 
     if (!state.category.messages.length) {
       drawer.drawNoMessages('Нет записей');

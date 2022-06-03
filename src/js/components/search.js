@@ -1,8 +1,8 @@
-import * as api from "../api";
+import * as api from '../api';
 import {
   COMPONENT_MESSAGES,
   COMPONENT_SEARCH,
-} from "../constants";
+} from '../constants';
 
 const createSearch = (drawer, state) => {
   const pinnedEl = document.getElementById('pinned-message');
@@ -16,13 +16,14 @@ const createSearch = (drawer, state) => {
 
   const searchMessage = async (e) => {
     e.preventDefault();
+
     pinnedEl.classList.add('hidden');
 
     if (!inputSearchEl) {
       return;
     }
-    const result = await api.fetchSearchingMessage(inputSearchEl.value);
 
+    const result = await api.fetchSearchingMessage(inputSearchEl.value);
     if (!result.length) {
       drawer.drawNoMessages('Ничего не найдено');
     } else {
@@ -49,8 +50,8 @@ const createSearch = (drawer, state) => {
 
   const onCancelSearch = (e) => {
     e.preventDefault();
-    clearSearchingResults();
 
+    clearSearchingResults();
     searchBlockEl.classList.add('hidden');
     if (state.pinnedMessage.id) {
       pinnedEl.classList.remove('hidden');

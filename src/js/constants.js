@@ -3,8 +3,7 @@ export const TITLE_FAVOURITES = 'Избранное';
 export const TITLE_IMAGES = 'Все изображения';
 export const TITLE_AUDIOS = 'Все аудиофайлы';
 export const TITLE_VIDEOS = 'Все видеофайлы';
-export const TITLE_TEXT= 'Все текстовые сообщения';
-
+export const TITLE_TEXT = 'Все текстовые сообщения';
 
 export const COMPONENT_MESSAGES = 'allMessages';
 export const COMPONENT_SEARCH = 'search';

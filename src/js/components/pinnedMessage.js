@@ -1,5 +1,5 @@
-import * as api from "../api";
-import { transformTextContent } from "../utils";
+import * as api from '../api';
+import { transformTextContent } from '../utils';
 
 const createPinnedMessage = (drawer, state) => {
   const pinnedEl = document.getElementById('pinned-message');
@@ -12,15 +12,15 @@ const createPinnedMessage = (drawer, state) => {
     let src;
     if (message.type === 'audio' || message.type === 'video' || message.type === 'image') {
       if (message.type === 'image') {
-        pinnedPicIcon.innerHTML = `<i class="fa-solid fa-image fa-2xl"></i>`;
+        pinnedPicIcon.innerHTML = '<i class="fa-solid fa-image fa-2xl"></i>';
       }
 
       if (message.type === 'audio') {
-        pinnedPicIcon.innerHTML = `<i class="fa-solid fa-music fa-2xl"></i>`;
+        pinnedPicIcon.innerHTML = '<i class="fa-solid fa-music fa-2xl"></i>';
       }
 
       if (message.type === 'video') {
-        pinnedPicIcon.innerHTML = `<i class="fa-solid fa-video fa-2xl"></i>`;
+        pinnedPicIcon.innerHTML = '<i class="fa-solid fa-video fa-2xl"></i>';
       }
 
       src = `https://chat-diploma.herokuapp.com${message.content.fileName}`;
@@ -31,7 +31,7 @@ const createPinnedMessage = (drawer, state) => {
       mediaLink.innerHTML = `${message.type}`;
       pinnedContent.replaceChildren(mediaLink);
     } else {
-      pinnedPicIcon.innerHTML = `<i class="fa-solid fa-file-lines fa-2xl"></i>`;
+      pinnedPicIcon.innerHTML = '<i class="fa-solid fa-file-lines fa-2xl"></i>';
       pinnedContent.innerHTML = transformTextContent(message.content);
     }
   };
@@ -41,27 +41,26 @@ const createPinnedMessage = (drawer, state) => {
     if (prevPinMessage) {
       prevPinMessage.querySelector('.message-pin').hidden = false;
     }
-  }
+  };
 
-  async function onClosePin() {
+  const onClosePin = async () => {
     pinnedEl.classList.add('hidden');
-    let result = await api.pinMessage({
-      type: "",
-      content: "",
-      author: "",
+    const result = await api.pinMessage({
+      type: '',
+      content: '',
+      author: '',
       timestamp: 0,
-      id: 0
+      id: 0,
     });
 
     displayMessagePinIcon(state.pinnedMessage.id);
-
     state.pinnedMessage = result;
-  }
+  };
 
   const pinMessage = async (e, { message, messageEl }) => {
     e.preventDefault();
 
-    let result = await api.pinMessage(message);
+    const result = await api.pinMessage(message);
     messageEl.querySelector('.message-pin').hidden = true;
 
     displayMessagePinIcon(state.pinnedMessage.id);
@@ -83,8 +82,8 @@ const createPinnedMessage = (drawer, state) => {
   closePinEl.addEventListener('click', onClosePin);
 
   return {
-    drawPinnedMessage
-  }
+    drawPinnedMessage,
+  };
 };
 
 export default createPinnedMessage;
